@@ -272,8 +272,10 @@ Here’s what each of these directives and location blocks do:
 + location ~ \.php$ — This location block handles the actual PHP processing by pointing Nginx to the fastcgi-php.conf configuration file and the *php7.4-fpm.sock file*, which declares what socket is associated with *php-fpm*.
 + location ~ /\.ht — The last location block deals with *.htaccess files*, which Nginx does not process. By adding the deny all directive, if any *.htaccess files* happen to find their way into the document root, they will not be served to visitors.
 
-When you’re done editing, save and close the file. If you’re using nano, you can do so by typing CTRL+X and then y and ENTER to confirm.
-Activate your configuration by linking to the config file from Nginx’s sites-enabled directory:
+When you’re done editing, save and close the file. 
+If you’re using nano, you can do so by typing **CTRL+X** and then **y** and **ENTER** to confirm.
+
+Activate your configuration by linking to the config file from Nginx’s *sites-enabled* directory:
 ```
 sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
 ```
@@ -295,7 +297,9 @@ When you are ready, reload Nginx to apply the changes:
 ```
 sudo systemctl reload nginx
 ```
-Your new website is now active, but the web root /var/www/projectLEMP is still empty. Create an index.html file in that location so that we can test that your new server block works as expected:
+Your new website is now active, but the web root /var/www/projectLEMP is still empty. 
+
+Create an index.html file in that location so that we can test that your new server block works as expected:
 ```
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ```
@@ -307,10 +311,11 @@ If you see the text from ‘echo’ command you wrote to index.html file, then i
 ```
 http://<Public-DNS-Name>:80
 ```
-You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it. 
+You can leave this file in place as a temporary landing page for your application until you set up an *index.php* file to replace it. 
 
-Once you do that, remember to remove or rename the index.html file from your document root, as it would take precedence over an index.php file by default.
+Once you do that, remember to remove or rename the *index.html* file from your document root, as it would take precedence over an *index.php* file by default.
 
 Your LEMP stack is now fully configured. 
 
-In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle .php files within your newly configured website.
+In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle *.php* files within your newly configured website.
+![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(126).png)
