@@ -319,3 +319,72 @@ Your LEMP stack is now fully configured.
 
 In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle *.php* files within your newly configured website.
 ![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(126).png)
+
+### STEP 5 – TESTING PHP WITH NGINX
+Your LEMP stack should now be completely set up.
+
+At this point, your LAMP stack is completely installed and fully operational.
+
+You can test it to validate that Nginx can correctly hand *.php* files off to your PHP processor.
+
+You can do this by creating a test PHP file in your document root. Open a new file called *info.php* within your document root in your text editor:
+```
+sudo nano /var/www/projectLEMP/info.php
+```
+Type or paste the following lines into the new file. This is valid PHP code that will return information about your server:
+```
+<?php
+phpinfo();
+```
+You can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by */info.php:*
+```
+http://`server_domain_or_IP`/info.php
+```
+You will see a web page containing detailed information about your server:
+![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(127).png)
+
+After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. You can use rm to remove that file:
+```
+sudo rm /var/www/your_domain/info.php
+```
+You can always regenerate this file if you need it later.
+
+E.g like this.
+![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(128).png)
+
+### STEP 6 – RETRIEVING DATA FROM MYSQL DATABASE WITH PHP (CONTINUED)
+#### *Step 6 — Retrieving data from MySQL database with PHP*
+In this step you will create a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+
+At the time of this writing, the native MySQL PHP library *mysqlnd* doesn’t support *caching_sha2_authentication*, the default authentication method for MySQL 8. We’ll need to create a new user with the *mysql_native_password* authentication method in order to be able to connect to the MySQL database from PHP.
+
+We will create a database named example_database and a user named example_user, but you can replace these names with different values.
+
+First, connect to the MySQL console using the root account:
+
+```
+sudo mysql
+```
+You might find this error
+![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(129).png)
+
+Remember you changed the password earlier so just do:
+```
+Sudo mysql -p
+```
+Then enter the new password you kept previously while installing mysql
+E.g Password.1
+
+To create a new database, run the following command from your MySQL console:
+```
+mysql> CREATE DATABASE `example_database`;
+```
+Now you can create a new user and grant him full privileges on the database you have just created.
+
+The following command creates a new user named **example_user**, using mysql_native_password as default authentication method. We’re defining this user’s password as **password**, but you should replace this value with a secure password of your own choosing.
+```
+mysql> CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+You might find this error:
+![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(130).png)
