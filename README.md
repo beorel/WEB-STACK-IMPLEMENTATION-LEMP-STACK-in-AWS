@@ -420,6 +420,6 @@ mysql -u example_user -p
 ```
 
 You might find this error
-![]()
+![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(132).png)
 
 **Note: the User’s password is** - **'password’**
