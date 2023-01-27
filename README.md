@@ -388,3 +388,38 @@ mysql> CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY '
 
 You might find this error:
 ![](https://github.com/beorel/WEB-STACK-IMPLEMENTATION-LEMP-STACK-in-AWS/blob/main/images/Screenshot%20(130).png)
+
+Do the following:
+
+Because of your password. You can see **password validate configuration metrics** using the following query in MySQL client:
+```
+SHOW VARIABLES LIKE 'validate_password%';
+```
+The output should be something like that :
+```
++--------------------------------------+-------+ | Variable_name | Value | +--------------------------------------+-------+ | validate_password.check_user_name | ON | | validate_password.dictionary_file | | | validate_password.length | 6 | | validate_password.mixed_case_count | 1 | | validate_password.number_count | 1 | | validate_password.policy | LOW | | validate_password.special_char_count | 1 | +--------------------------------------+-------+
+```
+then you can set the password policy level lower, for example:
+```
+SET GLOBAL validate_password.length = 6; 
+SET GLOBAL validate_password.number_count = 0;
+mysql> SET GLOBAL validate_password.policy=LOW;
+```
+Now we need to give this user permission over the **example_database** database:
+```
+mysql> GRANT ALL ON example_database.* TO 'example_user'@'%';
+```
+This will give the example_user user full privileges over the **example_database** database, while preventing this user from creating or modifying other databases on your server.
+Now exit the MySQL shell with:
+```
+mysql> exit
+```
+You can test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
+```
+mysql -u example_user -p
+```
+
+You might find this error
+![]()
+
+**Note: the User’s password is** - **'password’**
